@@ -12,6 +12,7 @@ import "reflect-metadata";                   // Nécessaire pour TypeORM
 import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import { DataSource } from "typeorm";
+import { User } from "./entities/User";
 //import userRoutes from "./routes/user.routes";    // (sera ajouté plus tard)
 //import { User } from "./entities/User";           // (sera ajouté plus tard)
 
@@ -29,7 +30,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,                // ex. 'blocklumen'
   synchronize: false,
   logging: false,
-  entities: [],               // Aucun entity pour le moment
+  entities: [User],               // Aucun entity pour le moment
   migrations: [],
   subscribers: [],
 });
