@@ -1,0 +1,49 @@
+services:
+  mysql:
+    image: mysql:8.0                        # Image officielle de MySQL version 8.0
+    container_name: blocklumen_mysql       # Nom du conteneur MySQL
+    restart: unless-stopped                # Redémarre le conteneur sauf si on l’arrête manuellement
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword    # Mot de passe root pour MySQL (à changer en prod)
+      MYSQL_DATABASE: blocklumen           # Crée automatiquement la base “blocklumen” au démarrage
+    volumes:
+      - mysql_data:/var/lib/mysql          # Volume persistant pour stocker les données MySQL
+      - ./BlockLumenBDD.sql:/docker-entrypoint-initdb.d/BlockLumenBDD.sql:ro
+        # Monte le dump SQL pour initialiser la base (lecture seule)
+    ports:
+      - "3306:3306"                        # Expose le port 3306 du conteneur sur le port 3306 de l’hôte
+    networks:
+      - blocklumen_net                     # Rattache MySQL au réseau interne “blocklumen_net”
+
+  backend:
+    build:
+      context: ./server                     # Contexte de build : dossier “server/”
+      dockerfile: Dockerfile                # Nom du Dockerfile à utiliser pour construire l’image
+      target: builder                       # Cible de build : “builder” pour les dépendances
+    container_name: blocklumen_backend       # Nom du conteneur backend
+    command: npm run dev                     # Lance “npm run dev” (Nodemon) en développement
+    volumes:
+      - ./server:/app                        # Monte le dossier local “server/” dans “/app” du conteneur
+      - /app/node_modules                    # Empêche l’écrasement des node_modules internes
+    ports:
+      - "5000:5000"                          # Expose le port 5000 du conteneur sur le port 5000 de l’hôte
+    environment:
+      - PORT=5000
+      - DB_HOST=mysql                        # Indique au backend que MySQL est accessible via “mysql”
+      - DB_PORT=3306                         # Port de connexion MySQL (par défaut 3306)
+      - DB_USER=root                         # Utilisateur MySQL
+      - DB_PASSWORD=rootpassword             # Mot de passe MySQL (doit correspondre à MYSQL_ROOT_PASSWORD)
+      - DB_NAME=blocklumen                   # Nom de la base de données à utiliser
+      - JWT_SECRET=taCleJWTUltraSecrete       # Clé secrète pour signer les JWTt<
+      - NODE_ENV=development                 # Mode développement (désactive le build optimisé)
+    depends_on:
+      - mysql                                 # S’assure que MySQL démarre avant le backend
+    networks:
+      - blocklumen_net                        # Rattache le backend au même réseau que MySQL
+
+volumes:
+  mysql_data:                               # Déclare le volume “mysql_data” pour persister les données
+
+networks:
+  blocklumen_net:                           # Définit un réseau pont dédié “blocklumen_net” / renforce la sécurité
+    driver: bridge
