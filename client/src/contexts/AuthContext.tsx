@@ -1,5 +1,3 @@
-// src/contexts/AuthContext.tsx
-
 import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode, ReactElement } from "react";
 import axios from "axios";

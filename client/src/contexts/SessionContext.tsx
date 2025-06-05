@@ -1,5 +1,3 @@
-// src/contexts/SessionContext.tsx
-
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuthContext } from "./AuthContext";
 import type { ReactNode, ReactElement } from "react";
