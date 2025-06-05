@@ -1,5 +1,5 @@
 import { Request, Response, RequestHandler } from 'express';
-import { AppDataSource } from '../../src/index';
+import { AppDataSource } from '../index';
 import { UserLearn } from '../entities/UserLearn';
 import { User } from '../entities/User';
 import { Learn } from '../entities/Learn';

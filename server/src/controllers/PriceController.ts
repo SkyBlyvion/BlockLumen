@@ -1,5 +1,5 @@
 import { Request, Response, RequestHandler } from 'express';
-import { AppDataSource } from '../../src/index';
+import { AppDataSource } from '../index';
 import { Price } from '../entities/Price';
 
 export class PriceController {

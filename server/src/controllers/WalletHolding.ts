@@ -1,5 +1,5 @@
 import { Request, Response, RequestHandler } from 'express';
-import { AppDataSource } from '../../src/index';
+import { AppDataSource } from '../index';
 import { WalletHolding } from '../entities/WalletHolding';
 import { Wallet } from '../entities/Wallet';
 

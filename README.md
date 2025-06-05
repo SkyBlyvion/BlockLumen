@@ -271,4 +271,42 @@ Les deux services démarrent en parallèle :
 
 ---
 
-> **Bon développement !**
+## Migrations 
+
+Avec ts-node :
+Générer une nouvelle migrration : 
+```bash
+npx ts-node --transpile-only -r ts-node/register \
+  ./node_modules/typeorm/cli.js migration:generate \
+  src/migrations/AddNewFieldToUser \
+  -d src/data-source.ts
+```
+
+Exécuter les migrations :
+```bash 
+npx ts-node --transpile-only -r ts-node/register \
+  ./node_modules/typeorm/cli.js migration:run \
+  -d src/data-source.ts
+```
+
+
+sans ts-node :
+Compiler le projet TypeScript en JavaScript : 
+```bash
+npm run build
+```
+
+Générer une migration sur le code compilé :
+```bash
+npx typeorm migration:generate \
+  dist/migrations/AddNewFieldToUser \
+  -d dist/data-source.js
+```
+
+Appliquer les migrations sur la base de données :
+```bash
+npx typeorm migration:run -d dist/data-source.js
+```
+
+
+

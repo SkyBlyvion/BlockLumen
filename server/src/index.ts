@@ -44,7 +44,7 @@ export const AppDataSource = new DataSource({
   synchronize: false,                           // false, on utilisera des migrations
   logging: false,
   entities: [User, Wallet, Preference, UserLearn, Learn, WalletHolding, Price, Trade ], // Ajouter les autres entités ici
-  migrations: ['dist/migrations/*.js'],
+  migrations: ['src/migrations/*.ts'],
   subscribers: [],
 });
 
