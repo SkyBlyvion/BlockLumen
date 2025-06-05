@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { AuthContextProvider } from './contexts/AuthContext';
 import { SessionContextProvider } from './contexts/SessionContext';
-import { store } from './redux/store';
+import store from './redux/store';
 import AppRouter from './routers/AppRouter';
 import './App.css'; // ou App.css selon votre config (pour Tailwind)
 
