@@ -13,14 +13,27 @@ import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import { DataSource } from "typeorm";
 import { User } from "./entities/User";
-//import userRoutes from "./routes/user.routes";    // (sera ajouté plus tard)
-//import { User } from "./entities/User";           // (sera ajouté plus tard)
+import { Wallet } from "./entities/Wallet";
+import { Preference } from "./entities/Preference";
+import { UserLearn } from "./entities/UserLearn";
+import { Learn } from "./entities/Learn";
+import { WalletHolding } from "./entities/WalletHolding";
+import { Price } from "./entities/Price";
+import { Trade } from "./entities/Trade";
+
+// Import des routes
+import userRoutes from './routes/user';
+import walletRoutes from './routes/wallet';
+import walletHoldingRoutes from './routes/walletHolding';
+import tradeRoutes from './routes/trade';
+import priceRoutes from './routes/price';
+import learnRoutes from './routes/learn';
+import preferenceRoutes from './routes/preference';
+import userLearnRoutes from './routes/userLearn';
 
 dotenv.config(); // Charger les variables d’environnement depuis le fichier .env
 
 // --- Configuration TypeORM ---
-// Comme l’entité User n’est pas encore créée, on passe un tableau vide.
-// L’objectif est simplement de pouvoir tester la route /health sans erreur.
 export const AppDataSource = new DataSource({
   type: "mysql",
   host: process.env.DB_HOST,                    // ex. 'mysql' (nom du service Docker)
@@ -28,10 +41,10 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USER,                // ex. 'root'
   password: process.env.DB_PASSWORD,            // ex. 'rootpassword'
   database: process.env.DB_NAME,                // ex. 'blocklumen'
-  synchronize: false,
+  synchronize: false,                           // false, on utilisera des migrations
   logging: false,
-  entities: [User],               // Aucun entity pour le moment
-  migrations: [],
+  entities: [User, Wallet, Preference, UserLearn, Learn, WalletHolding, Price, Trade ], // Ajouter les autres entités ici
+  migrations: ['dist/migrations/*.js'],
   subscribers: [],
 });
 
@@ -54,7 +67,14 @@ async function main() {
     });
 
     // (Routes futures) Rattacher les routes utilisateur
-    // app.use("/users", userRoutes);
+    app.use('/users', userRoutes);
+    app.use('/wallets', walletRoutes);
+    app.use('/holdings', walletHoldingRoutes);
+    app.use('/trades', tradeRoutes);
+    app.use('/prices', priceRoutes);
+    app.use('/learn', learnRoutes);
+    app.use('/preferences', preferenceRoutes);
+    app.use('/user-learn', userLearnRoutes);
 
     // Middleware de gestion des erreurs 404
     // Si aucune route ne correspond, on renvoie une 404 au client.

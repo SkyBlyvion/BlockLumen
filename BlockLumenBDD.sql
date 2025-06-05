@@ -104,7 +104,3 @@ CREATE TABLE
         CONSTRAINT `fk_ul_learn` FOREIGN KEY (`learn_id`) 
         REFERENCES `Learn` (`learn_id`) ON DELETE CASCADE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
-
-
-
-    
