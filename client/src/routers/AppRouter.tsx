@@ -1,8 +1,8 @@
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { useSessionContext } from '../contexts/SessionContext';
-import OnlineRouter from './OnlineRouter';
-import OfflineRouter from './OfflineRouter';
+import OnlineRouter from '../routers/OnlineRouter';
+import OfflineRouter from '../routers/OfflineRouter';
 
 /**
  * AppRouter choisit dynamiquement entre OnlineRouter et OfflineRouter
