@@ -12,6 +12,8 @@ import "reflect-metadata";                   // Nécessaire pour TypeORM
 import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import { DataSource } from "typeorm";
+
+// Import des entités TypeORM
 import { User } from "./entities/User";
 import { Wallet } from "./entities/Wallet";
 import { Preference } from "./entities/Preference";
@@ -76,11 +78,20 @@ async function main() {
     app.use('/preferences', preferenceRoutes);
     app.use('/user-learn', userLearnRoutes);
 
-    // Middleware de gestion des erreurs 404
-    // Si aucune route ne correspond, on renvoie une 404 au client.
-    app.use((_req: Request, res: Response, _next: NextFunction) => {
-      res.status(404).json({ message: "Route non trouvée" });
-    });
+    // 404 pour routes non définies
+    app.use((_req: Request, res: Response, next: NextFunction) => {
+      res.status(404)
+      next(new Error('Route non trouvée'))
+    })
+
+    // Gestionnaire d’erreurs
+    app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+      const status = res.statusCode !== 200 ? res.statusCode : 500
+      res.status(status).json({
+        message: err.message,
+        ...(process.env.NODE_ENV === 'development' ? { stack: err.stack } : {}),
+      })
+    })
 
     // Écoute sur le port défini dans .env ou 5000 par défaut
     const PORT = process.env.PORT || 5000;

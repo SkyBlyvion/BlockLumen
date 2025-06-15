@@ -8,10 +8,16 @@ services:
       MYSQL_DATABASE: blocklumen           # Crée automatiquement la base “blocklumen” au démarrage
     volumes:
       - mysql_data:/var/lib/mysql          # Volume persistant pour stocker les données MySQL
-      - ./BlockLumenBDD.sql:/docker-entrypoint-initdb.d/BlockLumenBDD.sql:ro
-        # Monte le dump SQL pour initialiser la base (lecture seule)
+      - ./BlockLumenBDD.sql:/docker-entrypoint-initdb.d/BlockLumenBDD.sql:ro # Monte le dump SQL pour initialiser la base (lecture seule)
+      - ./fixtures.sql:/docker-entrypoint-initdb.d/fixtures.sql:ro # Fixtures 
+        
     ports:
       - "3306:3306"                        # Expose le port 3306 du conteneur sur le port 3306 de l’hôte
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - blocklumen_net                     # Rattache MySQL au réseau interne “blocklumen_net”
 
@@ -21,7 +27,7 @@ services:
       dockerfile: Dockerfile                # Nom du Dockerfile à utiliser pour construire l’image
       target: builder                       # Cible de build : “builder” pour les dépendances
     container_name: blocklumen_backend       # Nom du conteneur backend
-    command: npm run dev                     # Lance “npm run dev” (Nodemon) en développement
+    command: npm run dev                   # Lance “npm run dev” (Nodemon) en développement
     volumes:
       - ./server:/app                        # Monte le dossier local “server/” dans “/app” du conteneur
       - /app/node_modules                    # Empêche l’écrasement des node_modules internes
@@ -37,7 +43,8 @@ services:
       - JWT_SECRET=taCleJWTUltraSecrete       # Clé secrète pour signer les JWTt<
       - NODE_ENV=development                 # Mode développement (désactive le build optimisé)
     depends_on:
-      - mysql                                 # S’assure que MySQL démarre avant le backend
+      mysql:                                 # S’assure que MySQL démarre avant le backend
+        condition: service_healthy
     networks:
       - blocklumen_net                        # Rattache le backend au même réseau que MySQL
 
