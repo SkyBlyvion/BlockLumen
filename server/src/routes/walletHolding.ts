@@ -1,21 +1,28 @@
 import { Router } from 'express';
-import { WalletController } from '../controllers/WalletController';
+import { AppDataSource } from '../index';
+import { WalletHolding } from '../entities/WalletHolding';
+import { Wallet } from '../entities/Wallet';
+import { WalletHoldingController } from '../controllers/WalletHoldingController';
 
 const router = Router();
+const controller = new WalletHoldingController(
+  AppDataSource.getRepository(WalletHolding),
+  AppDataSource.getRepository(Wallet)
+);
 
-// GET /wallets → liste tous les wallets
-router.get('/', WalletController.getAll);
+// GET /holdings → liste tous les holdings
+router.get('/', controller.getAll);
 
-// GET /wallets/:id → récupère un wallet par ID
-router.get('/:id', WalletController.getOne);
+// GET /holdings/:id → récupère un holding par ID
+router.get('/:id', controller.getOne);
 
-// POST /wallets → crée un nouveau wallet
-router.post('/', WalletController.create);
+// POST /holdings → crée un nouveau holding
+router.post('/', controller.create);
 
-// PUT /wallets/:id → met à jour un wallet
-router.put('/:id', WalletController.update);
+// PUT /holdings/:id → met à jour un holding
+router.put('/:id', controller.update);
 
-// DELETE /wallets/:id → supprime un wallet
-router.delete('/:id', WalletController.remove);
+// DELETE /holdings/:id → supprime un holding
+router.delete('/:id', controller.remove);
 
 export default router;
