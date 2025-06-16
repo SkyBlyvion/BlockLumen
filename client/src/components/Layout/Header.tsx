@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../assets/logo.svg";
+import logo from "../../assets/logo.svg";
 
 const Header: React.FC = () => (
   <header className="w-full h-20 bg-white shadow-md flex items-center justify-between px-4 sm:px-6 lg:px-10">

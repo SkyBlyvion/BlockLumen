@@ -1,9 +1,13 @@
-import { Request, Response, RequestHandler } from 'express';
+// src/controllers/UserController.ts
+
+import { RequestHandler } from 'express';
 import { Repository } from 'typeorm';
 import { User } from '../entities/User';
 
 /**
  * Controller pour la gestion des utilisateurs.
+ * Le repository est injecté via le constructeur pour être sûr
+ * que la DataSource est initialisée.
  */
 export class UserController {
   constructor(private repo: Repository<User>) {}
