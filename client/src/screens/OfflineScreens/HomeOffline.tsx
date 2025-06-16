@@ -6,7 +6,7 @@ import Footer from "../../components/Layout/Footer";
 /**
  * Landing hors-ligne : on réutilise Header et Footer
  */
-const LandingOffline: React.FC = () => {
+const HomeOffline: React.FC = () => {
   const modules = [
     { icon: "📘", title: "Module 1", sub: "Introduction aux cryptos" },
     { icon: "📊", title: "Module 2", sub: "Analyse technique" },
@@ -63,4 +63,4 @@ const LandingOffline: React.FC = () => {
   );
 };
 
-export default LandingOffline;
+export default HomeOffline;

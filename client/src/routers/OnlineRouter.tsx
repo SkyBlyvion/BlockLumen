@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import AppLayout from '../App';
+//import AppLayout from '../App';
 // import Dashboard from '../screens/OnlineScreens/Dashboard';
 // import WalletList from '../screens/OnlineScreens/WalletList';
 // import WalletDetail from '../screens/OnlineScreens/WalletDetail';
@@ -20,7 +20,7 @@ import PageError from '../screens/ErrorScreens/PageError';
  */
 const OnlineRouter = createBrowserRouter([
   {
-    element: <AppLayout />,
+    //element: <AppLayout />,
     errorElement: <PageError />,
     children: [
       {
