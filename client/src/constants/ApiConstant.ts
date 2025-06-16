@@ -13,6 +13,7 @@ export const API_ROOT: string = import.meta.env.VITE_API_BASE_URL || 'http://loc
  */
 export const API_URL: string = API_ROOT;
 
+
 /**
  * Endpoints métier. 
  * On peut directement importer ces constantes dans les services ou slices Redux.

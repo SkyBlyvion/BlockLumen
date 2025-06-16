@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 import AppLayout from '../App';
-import Dashboard from '../screens/OnlineScreens/Dashboard';
-import WalletList from '../screens/OnlineScreens/WalletList';
-import WalletDetail from '../screens/OnlineScreens/WalletDetail';
-import TradeHistory from '../screens/OnlineScreens/TradeHistory';
-import Learn from '../screens/OnlineScreens/Learn';
-import Profile from '../screens/OnlineScreens/Profile';
+// import Dashboard from '../screens/OnlineScreens/Dashboard';
+// import WalletList from '../screens/OnlineScreens/WalletList';
+// import WalletDetail from '../screens/OnlineScreens/WalletDetail';
+// import TradeHistory from '../screens/OnlineScreens/TradeHistory';
+// import Learn from '../screens/OnlineScreens/Learn';
+// import Profile from '../screens/OnlineScreens/Profile';
 import PageError from '../screens/ErrorScreens/PageError';
 
 /**
@@ -25,27 +25,27 @@ const OnlineRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Dashboard />,
+        // element: <Dashboard />,
       },
       {
         path: "/wallets",
-        element: <WalletList />,
+        // element: <WalletList />,
       },
       {
         path: "/wallets/:walletId",
-        element: <WalletDetail />,
+        // element: <WalletDetail />,
       },
       {
         path: "/trades",
-        element: <TradeHistory />,
+        // element: <TradeHistory />,
       },
       {
         path: "/learn",
-        element: <Learn />,
+        // element: <Learn />,
       },
       {
         path: "/profile",
-        element: <Profile />,
+        // element: <Profile />,
       },
     ],
   },

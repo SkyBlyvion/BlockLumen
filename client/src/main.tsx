@@ -5,7 +5,7 @@ import { AuthContextProvider } from './contexts/AuthContext';
 import { SessionContextProvider } from './contexts/SessionContext';
 import store from './redux/store';
 import AppRouter from './routers/AppRouter';
-import './App.css'; // ou App.css selon votre config (pour Tailwind)
+import './index.css'; // ou App.css selon votre config (pour Tailwind)
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

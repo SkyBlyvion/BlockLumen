@@ -1,5 +1,3 @@
--- fixtures.sql
-
 -- 1. Users
 INSERT INTO `User` (username, email, password_hash, created_at, last_login) VALUES
   ('alice', 'alice@example.com', '$2b$10$HashedPwdAlice', NOW() - INTERVAL 10 DAY, NOW() - INTERVAL 1 DAY),
