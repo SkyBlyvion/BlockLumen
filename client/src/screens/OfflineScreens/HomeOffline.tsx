@@ -1,93 +1,64 @@
-// src/screens/OfflineScreens/LandingOffline.tsx
-
 import React from "react";
 import { Link } from "react-router-dom";
-import { API_ROOT } from "../../constants/ApiConstant";
+import Header from "../../components/Layout/Header";
+import Footer from "../../components/Layout/Footer";
 
 /**
- * Page de présentation (landing) hors-ligne,
- * dérivée directement du design Figma.
- * Les boutons « Inscription » et « Connexion »
- * sont des <Link> vers /register et /login.
+ * Landing hors-ligne : on réutilise Header et Footer
  */
 const LandingOffline: React.FC = () => {
-  return (
-    <div className="w-screen min-h-screen bg-white flex flex-col items-center">
-      {/* Header */}
-      <div className="w-full h-20 bg-white shadow-md flex items-center justify-between px-10">
-        <div className="flex items-center gap-4">
-          <img
-            src={`src/images/logo.svg`}
-            alt="BlockLumen Logo"
-            width={36}
-            height={40}
-          />
-          <h1 className="text-4xl font-bold font-['Roboto']">BlockLumen</h1>
-        </div>
-        <nav className="flex gap-10 text-base font-['Roboto']">
-          <Link to="/market" className="hover:underline">Marché</Link>
-          <Link to="/trade"  className="hover:underline">Trader</Link>
-          <Link to="/learn"  className="hover:underline">Apprendre</Link>
-        </nav>
-        <div className="flex gap-4">
-          <Link
-            to="/register"
-            className="px-6 py-2 rounded-lg border border-black font-['Roboto']"
-          >
-            Inscription
-          </Link>
-          <Link
-            to="/login"
-            className="px-6 py-2 rounded-lg bg-black text-white font-['Roboto']"
-          >
-            Connexion
-          </Link>
-        </div>
-      </div>
+  const modules = [
+    { icon: "📘", title: "Module 1", sub: "Introduction aux cryptos" },
+    { icon: "📊", title: "Module 2", sub: "Analyse technique" },
+    { icon: "🧩", title: "Module 3", sub: "Altcoins" },
+  ];
 
-      {/* Grand titre + bouton d’appel à l’action */}
-      <div className="w-full flex-1 flex flex-col justify-center items-center px-44 py-20 gap-6">
-        <h2 className="text-4xl font-bold font-['Roboto'] text-center">
+  return (
+    <div className="w-screen min-h-screen bg-white flex flex-col">
+      <Header />
+
+      {/* Section Héros */}
+      <section className="w-full flex-1 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-44 py-10 sm:py-16 lg:py-20 gap-6">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-['Roboto'] text-center">
           Entraînez-vous au trading crypto en toute sécurité
         </h2>
-        <p className="text-base font-['Roboto'] text-center">
+        <p className="text-base sm:text-lg lg:text-xl font-['Roboto'] text-center max-w-2xl">
           BlockLumen, la simulation réaliste pour débutants.
         </p>
         <Link
           to="/register"
-          className="px-8 py-3 bg-black text-white rounded-lg font-['Roboto']"
+          className="px-6 sm:px-8 py-3 sm:py-4 bg-black text-white rounded-lg font-['Roboto'] text-base sm:text-lg"
         >
           Commencer maintenant
         </Link>
-      </div>
+      </section>
 
-      {/* Modules éducatifs (aperçu) */}
-      <section className="w-full px-44 py-14 flex flex-col items-center gap-10">
-        <h3 className="text-4xl font-bold font-['Roboto']">Modules éducatifs</h3>
-        <div className="w-full flex gap-10">
-          {[
-            { icon: "📘", title: "Module 1", sub: "Introduction aux cryptos" },
-            { icon: "📊", title: "Module 2", sub: "Analyse technique" },
-            { icon: "🧩", title: "Module 3", sub: "Altcoins" },
-          ].map((m) => (
-            <div key={m.title} className="flex-1 flex flex-col items-center gap-4">
-              <div className="w-24 h-24 bg-black/5 rounded-full flex items-center justify-center text-6xl">
+      {/* Modules éducatifs */}
+      <section className="w-full px-4 sm:px-6 lg:px-44 py-10 sm:py-14 flex flex-col items-center gap-8">
+        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-['Roboto']">
+          Modules éducatifs
+        </h3>
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {modules.map((m) => (
+            <div
+              key={m.title}
+              className="flex flex-col items-center gap-4 p-4 bg-white rounded-lg shadow-sm"
+            >
+              <div className="w-20 h-20 bg-black/5 rounded-full flex items-center justify-center text-5xl sm:text-6xl">
                 {m.icon}
               </div>
-              <h4 className="text-xl font-['Roboto']">{m.title}</h4>
-              <p className="text-base text-black/50 font-['Roboto']">{m.sub}</p>
+              <h4 className="text-lg sm:text-xl font-semibold font-['Roboto']">
+                {m.title}
+              </h4>
+              <p className="text-sm sm:text-base text-black/50 font-['Roboto']">
+                {m.sub}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Footer simplifié */}
-      <footer className="w-full p-10 bg-gray-100 flex justify-center gap-14 font-['Roboto']">
-        <Link to="/about" className="hover:underline">À propos</Link>
-        <Link to="/contact" className="hover:underline">Contact</Link>
-        <Link to="/legal" className="hover:underline">Mentions légales</Link>
-        <Link to="/privacy" className="hover:underline">Confidentialité</Link>
-      </footer>
+      <Footer />
     </div>
   );
 };

@@ -23,4 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-/src/components
+/src/components/Button
+/src/components/Input
+/src/components/Loader
+/src/components/Menu
+/src/components/Misc
