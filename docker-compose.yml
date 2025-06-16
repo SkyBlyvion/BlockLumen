@@ -10,7 +10,6 @@ services:
       - mysql_data:/var/lib/mysql          # Volume persistant pour stocker les données MySQL
       - ./BlockLumenBDD.sql:/docker-entrypoint-initdb.d/BlockLumenBDD.sql:ro # Monte le dump SQL pour initialiser la base (lecture seule)
       - ./fixtures.sql:/docker-entrypoint-initdb.d/fixtures.sql:ro # Fixtures 
-        
     ports:
       - "3306:3306"                        # Expose le port 3306 du conteneur sur le port 3306 de l’hôte
     healthcheck:

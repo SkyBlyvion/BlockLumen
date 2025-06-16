@@ -1,19 +1,17 @@
-// src/controllers/UserController.ts
-
 import { RequestHandler } from 'express';
 import { Repository } from 'typeorm';
 import { User } from '../entities/User';
 
-/**
- * Controller pour la gestion des utilisateurs.
+/** Controller pour la gestion des utilisateurs.
+ * 
  * Le repository est injecté via le constructeur pour être sûr
  * que la DataSource est initialisée.
  */
 export class UserController {
   constructor(private repo: Repository<User>) {}
 
-  /**
-   * GET /users
+  /** GET /users
+   * 
    * Récupère la liste de tous les utilisateurs.
    */
   getAll: RequestHandler = async (_req, res) => {
@@ -26,8 +24,8 @@ export class UserController {
     }
   };
 
-  /**
-   * GET /users/:id
+  /** GET /users/:id
+   * 
    * Récupère un utilisateur par son ID.
    * Si l’utilisateur n’existe pas, renvoie 404.
    */
@@ -46,7 +44,7 @@ export class UserController {
     }
   };
 
-  /**
+  /** POST /users
    * POST /users
    * Crée un nouvel utilisateur.
    * Body attendu : { username, email, password_hash }.
@@ -63,7 +61,7 @@ export class UserController {
     }
   };
 
-  /**
+  /** PUT /users/:id
    * PUT /users/:id
    * Met à jour un utilisateur existant.
    * Si inexistant, renvoie 404.
@@ -88,7 +86,7 @@ export class UserController {
     }
   };
 
-  /**
+  /** DELETE /users/:id
    * DELETE /users/:id
    * Supprime un utilisateur. Si inexistant, renvoie 404.
    */
