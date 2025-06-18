@@ -16,7 +16,7 @@
 |------------------|------------------------|--------------------------------------------------------|
 | id               | INT AUTO_INCREMENT     | Identifiant unique du portefeuille                     |
 | created_at       | DATETIME               | Date de création du portefeuille                       |
-| initial_balance  | DECIMAL(15,2)          | Solde virtuel de départ (ex. 10 000 $)                 |
+| balance          | DECIMAL(15,2)          | Solde (ex. 10 000 $)                                   |
 
 ## 3. Wallet_Holding
 | Attribut         | Type                   | Description                                            |
