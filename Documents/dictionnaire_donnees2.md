@@ -15,15 +15,13 @@
 | Attribut         | Type                   | Description                                            |
 |------------------|------------------------|--------------------------------------------------------|
 | id               | INT AUTO_INCREMENT     | Identifiant unique du portefeuille                     |
-| user_id          | INT                    | Référence à l’utilisateur (clé étrangère)              |
 | created_at       | DATETIME               | Date de création du portefeuille                       |
 | initial_balance  | DECIMAL(15,2)          | Solde virtuel de départ (ex. 10 000 $)                 |
 
 ## 3. Wallet_Holding
 | Attribut         | Type                   | Description                                            |
 |------------------|------------------------|--------------------------------------------------------|
-| holding_id       | INT AUTO_INCREMENT     | Identifiant unique de la détention                     |
-| wallet_id        | INT                    | Référence au portefeuille (clé étrangère)              |
+| id               | INT AUTO_INCREMENT     | Identifiant unique de la détention                     |
 | crypto_symbol    | VARCHAR(10)            | Code de la cryptomonnaie (BTC, ETH, …)                 |
 | quantity         | DECIMAL(18,8)          | Quantité détenue de la cryptomonnaie                   |
 | average_price    | DECIMAL(15,2)          | Prix moyen d’acquisition                               |
@@ -32,7 +30,6 @@
 | Attribut         | Type                   | Description                                            |
 |------------------|------------------------|--------------------------------------------------------|
 | id               | INT AUTO_INCREMENT     | Identifiant unique                                     |
-| holding_id       | INT                    | Référence au portefeuille de holding (clé étrangère)   |
 | crypto_symbol    | VARCHAR(10)            | Code de la cryptomonnaie (BTC, ETH, …)                 |
 | type             | ENUM('achat','vente')  | Nature de l’opération (achat ou vente)                 |
 | amount           | DECIMAL(18,8)          | Quantité de cryptomonnaie échangée                     |
@@ -59,9 +56,7 @@
 ## 7. User_Learn
 | Attribut      | Type                      | Description                                            |
 |---------------|---------------------------|--------------------------------------------------------|
-| user_learn_id | INT AUTO_INCREMENT        | Identifiant unique                                     |
-| user_id       | INT                       | Référence à l’utilisateur (clé étrangère)              |
-| module_id     | INT                       | Référence au module pédagogique (clé étrangère)        |
+| id            | INT AUTO_INCREMENT        | Identifiant unique                                     |
 | is_completed  | BOOLEAN                   | Indicateur si le module est complété par l’utilisateur |
 | completed_at  | DATETIME                  | Date et heure de complétion (facultatif)               |
 
@@ -69,7 +64,6 @@
 | Attribut   | Type                         | Description                                            |
 |------------|------------------------------|--------------------------------------------------------|
 | id         | INT AUTO_INCREMENT           | Identifiant unique                                     |
-| user_id    | INT                          | Référence à l’utilisateur (clé étrangère)              |
 | key        | VARCHAR(100)                 | Nom de la préférence (ex. 'theme', 'notifications')    |
 | value      | VARCHAR(255)                 | Valeur associée (ex. 'dark', 'true')                   |
 
